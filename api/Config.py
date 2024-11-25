@@ -1,0 +1,10 @@
+USERNAME='root'
+PASSWORD='1317b90'
+HOSTNAME='114.132.45.130'
+PORT='3306'
+DATABASE='deal37'
+CHARSET='utf8mb4'
+SQL_URL=('mysql://'+
+        USERNAME+':'+PASSWORD+'@'+
+        HOSTNAME+':'+PORT+'/'+
+        DATABASE)
