@@ -1,0 +1,7 @@
+fastapi
+tortoise-orm
+aiomysql
+httpx
+python-multipart
+uvicorn
+uvicorn[standard]
