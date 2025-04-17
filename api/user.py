@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Body, HTTPException
 from tortoise.contrib.pydantic import pydantic_model_creator
 from Table import User
 
@@ -59,3 +59,16 @@ async def get_user_by_username(username: str):
     if not user:
         raise HTTPException(status_code=404, detail="用户不存在")
     return await User_Pydantic.from_tortoise_orm(user)
+
+
+@app.post("/user/balance", summary="更新用户余额")
+async def update_balance_api(user_id: int=Body(...), balance: float=Body(...)):
+    await update_balance(user_id, balance)
+    return {"message": "余额更新成功"}
+
+async def update_balance(user_id: int, balance: float):
+    user = await User.get(id=user_id)
+    user.balance = balance
+    await user.save()
+
+

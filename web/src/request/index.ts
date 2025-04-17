@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const testURL = "http://8.137.105.108:377"
-// const testURL = "http://localhost:8000"
+//const testURL = "http://localhost:8000"
 
 const service = axios.create({
 	baseURL: testURL,

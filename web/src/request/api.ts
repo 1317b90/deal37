@@ -1,5 +1,5 @@
 import service from "@/request/index";
-import type { informationI, UserI, CommodityI } from "@/interface";
+import type { informationI, UserI, CommodityI, OrderI } from "@/interface";
 
 
 // 获取行情
@@ -141,6 +141,18 @@ export async function getUserByUsername(username: string) {
   });
 }
 
+// 更新用户余额
+export async function updateUserBalance(userId: number, balance: number) {
+  return service({
+    url: '/user/balance',
+    method: 'POST',
+    data: {
+      user_id: userId,
+      balance: balance
+    }
+  });
+}
+
 // 创建商品
 export async function createCommodity(commodity: Omit<CommodityI, 'id'>) {
   return service({
@@ -253,6 +265,57 @@ export async function initializeChat(senderId: number, receiverId: number) {
       sender_id: senderId,
       receiver_id: receiverId
     }
+  });
+}
+
+// 创建支付宝订单
+export async function createAlipayOrder(params: {
+  buy_id: number;
+  commodity_id: number;
+  number: number;
+  address: string;
+  phone: string;
+}) {
+  return service({
+    url: '/alipay/create',
+    method: 'POST',
+    data: params
+  });
+}
+
+
+// 查询支付状态
+export async function getAlipayStatus(order_id: string) {
+  return service({
+    url: '/alipay/status',
+    method: 'GET',
+    params: { order_id }
+  });
+}
+
+// 获取订单列表
+export async function getOrderList(params: {
+  page?: number;
+  limit?: number;
+  sell_id?: string;
+  buy_id?: string;
+}) {
+  return service({
+    url: '/order/list',
+    method: 'GET',
+    params
+  });
+}
+
+// 更新订单
+export async function updateOrder(orderId: string, data: {
+  status?: string;
+  express_number?: string;
+}) {
+  return service({
+    url: `/order/${orderId}`,
+    method: 'PUT',
+    data
   });
 }
 

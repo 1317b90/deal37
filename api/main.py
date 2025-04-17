@@ -10,6 +10,8 @@ import user
 import commodity
 import file
 import chat
+import pay
+import order
 
 app = FastAPI(title="Deal37—API")
 FILE_DIR = Path("./files")
@@ -21,6 +23,8 @@ app.include_router(user.app)
 app.include_router(commodity.app)
 app.include_router(file.app)
 app.include_router(chat.app)
+app.include_router(pay.app)
+app.include_router(order.app)
 
 # 解决跨域
 app.add_middleware(

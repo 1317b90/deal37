@@ -35,7 +35,19 @@ export interface CommodityI {
   updated_at?: Date;  // 更新时间
 }
 
-
+export interface OrderI {
+  id: string;
+  buy_id: number;      // 买家ID
+  sell_id: number;     // 卖家ID
+  commodity_id: number; // 商品ID
+  number: number;      // 购买数量
+  amount: number;      // 订单金额
+  status: string;      // 订单状态
+  express_number?: string; // 快递单号
+  address: string;     // 收货地址
+  phone: string;       // 联系电话
+  created_at?: Date;  // 创建时间
+}
 
 export const specifications = ["10头", "20头", "30头", "40头", "60头", "80头", "120头", "无数头", "统货"]
 

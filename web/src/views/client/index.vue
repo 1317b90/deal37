@@ -15,6 +15,8 @@
 
                 <a-menu-item key="/chat" class="app-menu-title"><span class="app-menu-title">我要聊天</span></a-menu-item>
 
+                <a-menu-item key="/order" class="app-menu-title"><span class="app-menu-title">我的订单</span></a-menu-item>
+
                 <a-sub-menu key="/auth/login" class="app-menu-login" style="margin-left: auto;">
                     <template #title>
                         <span>
@@ -41,11 +43,12 @@
     </a-layout>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { UserOutlined } from '@ant-design/icons-vue';
 import { RouterLink, RouterView } from 'vue-router'
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 const router = useRouter();
+const route = useRoute();
 
 const selectedKeys = ref<string[]>(['/']);
 selectedKeys.value[0] = sessionStorage.getItem('router') || '/';
@@ -63,6 +66,12 @@ function selectMenu(item: any) {
     sessionStorage.setItem('router', item.key);
     router.push(item.key)
 }
+
+// 监听路由变化，更新菜单选中状态
+watch(() => route.path, (newPath) => {
+    selectedKeys.value = [newPath];
+    sessionStorage.setItem('router', newPath);
+}, { immediate: true });
 
 onMounted(() => {
     const localUserInfo = localStorage.getItem('userInfo')

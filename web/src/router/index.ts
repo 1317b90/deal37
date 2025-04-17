@@ -42,6 +42,16 @@ const router = createRouter({
           name: 'chat',
           component: () => import('../views/client/chat.vue')
         },
+        {
+          path: '/payresult',
+          name: 'payresult',
+          component: () => import('../views/client/payresult.vue')
+        },
+        {
+          path: '/order',
+          name: 'order',
+          component: () => import('../views/client/order.vue')
+        }
       ]
     },
     {
